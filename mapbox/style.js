@@ -12,36 +12,21 @@ var styleJSON = {
             "tiles": ["http://tile.openstreetmap.org/{z}/{x}/{y}.png"],
             "tileSize": 256
         },
-        "bathymetry_1": {
+        "GJhabitat_1": {
+            "type": "geojson",
+            "data": json_GJhabitat_1
+        }
+                    ,
+        "bathymetry_2": {
             "type": "image",
-            "url": "./data/bathymetry_1.png",
+            "url": "./data/bathymetry_2.png",
             "coordinates": [
                 [-0.000675, 0.000356],
                 [-0.000613, 0.000356],
                 [-0.000613, 0.000378],
                 [-0.000675, 0.000378]
             ]
-        },
-        "AveragePresenceAbundance_2": {
-            "type": "geojson",
-            "data": json_AveragePresenceAbundance_2
-        }
-                    ,
-        "sedim_class_3": {
-            "type": "image",
-            "url": "./data/sedim_class_3.png",
-            "coordinates": [
-                [-0.000708, 0.000274],
-                [-0.000581, 0.000274],
-                [-0.000581, 0.000416],
-                [-0.000708, 0.000416]
-            ]
-        },
-        "benhab_sne_4": {
-            "type": "geojson",
-            "data": json_benhab_sne_4
-        }
-                    },
+        }},
     "sprite": "",
     "glyphs": "https://glfonts.lukasmartinelli.ch/fonts/{fontstack}/{range}.pbf",
     "layers": [
@@ -59,33 +44,18 @@ var styleJSON = {
             "source": "OSMStandard_0"
         },
         {
-            "id": "lyr_bathymetry_1_1",
-            "type": "raster",
-            "source": "bathymetry_1",
-            "minzoom": 0,
-            "maxzoom": 22
-        },
-        {
-            "id": "lyr_AveragePresenceAbundance_2_0",
+            "id": "lyr_GJhabitat_1_0",
             "type": "fill",
-            "source": "AveragePresenceAbundance_2",
+            "source": "GJhabitat_1",
             "layout": {},
-            "paint": {'fill-opacity': 1.0, 'fill-color': '#d5b43c'}
+            "paint": {'fill-opacity': 1.0, 'fill-color': '#85b66f'}
         }
 ,
         {
-            "id": "lyr_sedim_class_3_3",
+            "id": "lyr_bathymetry_2_2",
             "type": "raster",
-            "source": "sedim_class_3",
+            "source": "bathymetry_2",
             "minzoom": 0,
             "maxzoom": 22
-        },
-        {
-            "id": "lyr_benhab_sne_4_0",
-            "type": "fill",
-            "source": "benhab_sne_4",
-            "layout": {},
-            "paint": {'fill-opacity': 1.0, 'fill-color': '#729b6f'}
-        }
-],
+        }],
 }
