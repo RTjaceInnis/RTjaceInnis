@@ -12,21 +12,21 @@ var styleJSON = {
             "tiles": ["http://tile.openstreetmap.org/{z}/{x}/{y}.png"],
             "tileSize": 256
         },
-        "GJhabitat_1": {
-            "type": "geojson",
-            "data": json_GJhabitat_1
-        }
-                    ,
-        "bathymetry_2": {
+        "bathymetry_1": {
             "type": "image",
-            "url": "./data/bathymetry_2.png",
+            "url": "./data/bathymetry_1.png",
             "coordinates": [
                 [-0.000675, 0.000356],
                 [-0.000613, 0.000356],
                 [-0.000613, 0.000378],
                 [-0.000675, 0.000378]
             ]
-        }},
+        },
+        "SMAST_ScallopsAveragePresenceAbundance_2": {
+            "type": "geojson",
+            "data": json_SMAST_ScallopsAveragePresenceAbundance_2
+        }
+                    },
     "sprite": "",
     "glyphs": "https://glfonts.lukasmartinelli.ch/fonts/{fontstack}/{range}.pbf",
     "layers": [
@@ -44,18 +44,18 @@ var styleJSON = {
             "source": "OSMStandard_0"
         },
         {
-            "id": "lyr_GJhabitat_1_0",
-            "type": "fill",
-            "source": "GJhabitat_1",
-            "layout": {},
-            "paint": {'fill-opacity': 1.0, 'fill-color': '#85b66f'}
-        }
-,
-        {
-            "id": "lyr_bathymetry_2_2",
+            "id": "lyr_bathymetry_1_1",
             "type": "raster",
-            "source": "bathymetry_2",
+            "source": "bathymetry_1",
             "minzoom": 0,
             "maxzoom": 22
-        }],
+        },
+        {
+            "id": "lyr_SMAST_ScallopsAveragePresenceAbundance_2_0",
+            "type": "fill",
+            "source": "SMAST_ScallopsAveragePresenceAbundance_2",
+            "layout": {},
+            "paint": {'fill-opacity': 1.0, 'fill-color': '#e77148'}
+        }
+],
 }
