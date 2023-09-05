@@ -1,165 +1,90 @@
-<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="mapbox/mapbox-gl.css">
-        <link rel="stylesheet" href="css/qgis2web.css">
-        <style>
-        #map {
-            width: 542px;
-            height: 666px;
-        }
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div id="map">
-            <nav id="menu"></nav>
-              <div id="distance" class="distance-container"></div>
-        </div>
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="./mapbox/mapbox-gl.js"></script>
-        <script src="data/SMAST_ScallopsAveragePresenceAbundance_2.js"></script>
-<script src="./mapbox/style.js"></script>
-<script src="./js/Autolinker.min.js"></script>
-<script>
-var map = new mapboxgl.Map({
- container: 'map',
- style: styleJSON,
- center: [-70.77743724215885,40.427435956478575],
- zoom: 6,
- bearing: 360.0,
- attributionControl: false
-});
-map.addControl(new mapboxgl.NavigationControl(), 'top-left');
-map.addControl(new mapboxgl.AttributionControl({
-    customAttribution: '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://github.com/mapbox/mapbox-gl-js" target="_blank">Mapbox GL JS</a> &middot; <a href="https://qgis.org" target="_blank">QGIS</a>',
-    compact: false
-}));
-var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add a map to a webpage</title>
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.js"></script>
+<link rel='stylesheet' href='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css' />
+<script src='https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js'></script>
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css" rel="stylesheet" />
+<link href='https://www.unpkg.com/@watergis/maplibre-gl-legend@latest/dist/maplibre-gl-legend.css' rel='stylesheet' />
+<script src="https://www.unpkg.com/@watergis/maplibre-gl-legend@latest/dist/maplibre-gl-legend.umd.js"></script>
+<style>
+  body {margin: 0; padding: 0;}
+  #map {position: absolute; top: 0; bottom: 0; width: 100%;}
+</style>
+</head>
+<body>// 3857 to 4326
+<div id="map"></div>
+  <script>
+    maptilersdk.config.apiKey = 'upK2HQ8GCr8vMKjdFvuS';
+    const map = new maptilersdk.Map({
+      container: 'map', // container id
+      style: 'ocean',
+      center: [287.210788, 40.073027], // starting position [lng, lat]
+      zoom: 6.12, // starting zoom
+      pitch: 76,
+      bearing: -20,
+      maxPitch: 85,
+    });
+    
+    map.on('load', function() {
+      map.addSource("bathymetry", {
+        type: 'raster-dem',
+        url: 'https://api.maptiler.com/tiles/ocean-rgb/tiles.json',
+      });
+      map.setTerrain({ source: 'bathymetry', exaggeration: 9 });
+    });
 
-map.on('click', 'lyr_SMAST_ScallopsAveragePresenceAbundance_2_0', function (e) {
-    var description = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['OBJECTID'] !== null ? autolinker.link(e.features[0].properties['OBJECTID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['F100km_Id'] !== null ? autolinker.link(e.features[0].properties['F100km_Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['F1000Km_Id'] !== null ? autolinker.link(e.features[0].properties['F1000Km_Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['AreaKm'] !== null ? autolinker.link(e.features[0].properties['AreaKm'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['Stations'] !== null ? autolinker.link(e.features[0].properties['Stations'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['DepthAve'] !== null ? autolinker.link(e.features[0].properties['DepthAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['ScallopAve'] !== null ? autolinker.link(e.features[0].properties['ScallopAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SeaStarAve'] !== null ? autolinker.link(e.features[0].properties['SeaStarAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['CrabAve'] !== null ? autolinker.link(e.features[0].properties['CrabAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['HerCrabAve'] !== null ? autolinker.link(e.features[0].properties['HerCrabAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SandDolAve'] !== null ? autolinker.link(e.features[0].properties['SandDolAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['BryHydAve'] !== null ? autolinker.link(e.features[0].properties['BryHydAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['HolesAve'] !== null ? autolinker.link(e.features[0].properties['HolesAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['MnSnailAve'] !== null ? autolinker.link(e.features[0].properties['MnSnailAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SpongeAve'] !== null ? autolinker.link(e.features[0].properties['SpongeAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['FlatFishAv'] !== null ? autolinker.link(e.features[0].properties['FlatFishAv'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['RHakeAve'] !== null ? autolinker.link(e.features[0].properties['RHakeAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SkateAve'] !== null ? autolinker.link(e.features[0].properties['SkateAve'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['DepthSD'] !== null ? autolinker.link(e.features[0].properties['DepthSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['ScallopSD'] !== null ? autolinker.link(e.features[0].properties['ScallopSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SeaStarSD'] !== null ? autolinker.link(e.features[0].properties['SeaStarSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['CrabSD'] !== null ? autolinker.link(e.features[0].properties['CrabSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['HerCrabSD'] !== null ? autolinker.link(e.features[0].properties['HerCrabSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SandDolSD'] !== null ? autolinker.link(e.features[0].properties['SandDolSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['BryHydSD'] !== null ? autolinker.link(e.features[0].properties['BryHydSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['HolesSD'] !== null ? autolinker.link(e.features[0].properties['HolesSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['MnSnailSD'] !== null ? autolinker.link(e.features[0].properties['MnSnailSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SpongeSD'] !== null ? autolinker.link(e.features[0].properties['SpongeSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['FlatFishSD'] !== null ? autolinker.link(e.features[0].properties['FlatFishSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['RHakeSD'] !== null ? autolinker.link(e.features[0].properties['RHakeSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['SkateSD'] !== null ? autolinker.link(e.features[0].properties['SkateSD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['Shape_Length'] !== null ? autolinker.link(e.features[0].properties['Shape_Length'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (e.features[0].properties['Shape_Area'] !== null ? autolinker.link(e.features[0].properties['Shape_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>'
+    map.on('load', () => {
+        map.addSource('national-park', {
+            'type': 'geojson',
+            'data': 'Test.geojson'
+        });
 
-    new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML(description)
-        .addTo(map);
+        map.addLayer({
+            'id': 'parkboundary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#B42222',
+                'fill-opacity': 0.4
+            },
+            'filter': ['==', 'SEDIMENT', "0.03 - 0.17 Sand"]
+        });
+
+        map.addLayer({
+            'id': 'park-volcanoes',
+            'type': 'circle',
+            'source': 'national-park',
+            'paint': {
+                'circle-radius': 6,
+                'circle-color': '#B42222'
+            },
+            'filter': ['==', '$type', 'Point']
+        });
+    });
+    map.on('load', function() {
+  const targets = {
+    Residential: "Residential",
+    parkboundary: "parkboasdfundary",
+    Water: "Water",
+    Building: "Building",
+    Airport: "Airport",
+    "Other POI": "Pois",
+  };
+  const options = {
+    showDefault: true,
+    showCheckbox: true,
+    onlyRendered: true,
+    reverseOrder: true
+  };
+  map.addControl(new MaplibreLegendControl.MaplibreLegendControl(targets, options), "bottom-left");
 });
 
-// Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'lyr_SMAST_ScallopsAveragePresenceAbundance_2_0', function () {
-    map.getCanvas().style.cursor = 'pointer';
-});
 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'lyr_SMAST_ScallopsAveragePresenceAbundance_2_0', function () {
-    map.getCanvas().style.cursor = '';
-});
-</script>
-    </body>
+  </script>
+</body>
 </html>
+
