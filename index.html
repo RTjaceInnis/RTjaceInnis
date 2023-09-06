@@ -23,20 +23,13 @@
     const map = new maptilersdk.Map({
       container: 'map', // container id
       style: 'ocean',
-      center: [287.210788, 40.073027], // starting position [lng, lat]
+      center: [-71.016875, 40.254983], // starting position [lng, lat]
       zoom: 6.12, // starting zoom
-      pitch: 76,
-      bearing: -20,
-      maxPitch: 85,
+      //pitch: 76,
+      //bearing: -20,
+     // maxPitch: 85,
     });
     
-    map.on('load', function() {
-      map.addSource("bathymetry", {
-        type: 'raster-dem',
-        url: 'https://api.maptiler.com/tiles/ocean-rgb/tiles.json',
-      });
-      map.setTerrain({ source: 'bathymetry', exaggeration: 9 });
-    });
 
     map.on('load', () => {
         map.addSource('national-park', {
