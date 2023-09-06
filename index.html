@@ -41,7 +41,7 @@
     map.on('load', () => {
         map.addSource('national-park', {
             'type': 'geojson',
-            'data': 'Test.geojson'
+            'data': 'https://rtjaceinnis.github.io/RTjaceInnis/Sedi.geojson'
         });
 
         map.addLayer({
@@ -50,21 +50,113 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#B42222',
-                'fill-opacity': 0.4
+                'fill-opacity': 0.6
             },
-            'filter': ['==', 'SEDIMENT', "0.03 - 0.17 Sand"]
+            'filter': ['==', 'Sediment', 2000]
         });
-
         map.addLayer({
-            'id': 'park-volcanoes',
-            'type': 'circle',
+            'id': 'parkbowqry',
+            'type': 'fill',
             'source': 'national-park',
             'paint': {
-                'circle-radius': 6,
-                'circle-color': '#B42222'
+                'fill-color': '#B42222',
+                'fill-opacity': 0.2
             },
-            'filter': ['==', '$type', 'Point']
+            'filter': ['==', 'Sediment', 210]
         });
+        map.addLayer({
+            'id': 'parkbqeary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#B42222',
+                'fill-opacity': 0.1
+            },
+            'filter': ['==', 'Sediment', 250]
+        });
+
+
+
+
+
+
+
+
+        map.addLayer({
+            'id': 'parkbounqwerdary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#ffbf97',
+                'fill-opacity': 0.6
+            },
+            'filter': ['==', 'Sediment', 1000]
+        });
+        map.addLayer({
+            'id': 'parkborsdwqry',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#ffbf97',
+                'fill-opacity': 0.2
+            },
+            'filter': ['==', 'Sediment', 120]
+        });
+        map.addLayer({
+            'id': 'parkbsdfqeary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#ffbf97',
+                'fill-opacity': 0.1
+            },
+            'filter': ['==', 'Sediment', 150]
+        });
+
+
+
+
+
+
+
+
+
+
+        map.addLayer({
+            'id': 'parkboufgndary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#3e6deb',
+                'fill-opacity': 0.6
+            },
+            'filter': ['==', 'Sediment', 5000]
+        });
+        map.addLayer({
+            'id': 'parkbowdsqry',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#3e6deb',
+                'fill-opacity': 0.2
+            },
+            'filter': ['==', 'Sediment', 510]
+        });
+        map.addLayer({
+            'id': 'parkbqesdfgary',
+            'type': 'fill',
+            'source': 'national-park',
+            'paint': {
+                'fill-color': '#3e6deb',
+                'fill-opacity': 0.2
+            },
+            'filter': ['==', 'Sediment', 520]
+        });
+
+
+        
+
+        
     });
     map.on('load', function() {
   const targets = {
