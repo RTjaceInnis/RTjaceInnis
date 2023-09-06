@@ -45,7 +45,7 @@
         });
 
         map.addLayer({
-            'id': 'parkboundary',
+            'id': 'MUD',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
@@ -62,28 +62,14 @@
                 'fill-color': '#B42222',
                 'fill-opacity': 0.2
             },
-            'filter': ['==', 'Sediment', 210]
-        });
-        map.addLayer({
-            'id': 'parkbqeary',
-            'type': 'fill',
-            'source': 'national-park',
-            'paint': {
-                'fill-color': '#B42222',
-                'fill-opacity': 0.1
-            },
-            'filter': ['==', 'Sediment', 250]
-        });
+            'filter': ['any', ['==', 'Sediment', 250], ['==', 'Sediment', 210], ['==', 'Sediment', 260]  ]
+          });
 
 
 
 
-
-
-
-
-        map.addLayer({
-            'id': 'parkbounqwerdary',
+          map.addLayer({
+            'id': 'SAND',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
@@ -93,65 +79,53 @@
             'filter': ['==', 'Sediment', 1000]
         });
         map.addLayer({
-            'id': 'parkborsdwqry',
+            'id': 'parkbasdfasdowqry',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
                 'fill-color': '#ffbf97',
-                'fill-opacity': 0.2
+                'fill-opacity': 0.4
             },
-            'filter': ['==', 'Sediment', 120]
-        });
-        map.addLayer({
-            'id': 'parkbsdfqeary',
+            'filter': ['any', ['==', 'Sediment', 120], ['==', 'Sediment', 150], ['==', 'Sediment', 170]  ]
+          });
+
+          map.addLayer({
+            'id': 'ROCK',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
-                'fill-color': '#ffbf97',
-                'fill-opacity': 0.1
-            },
-            'filter': ['==', 'Sediment', 150]
-        });
-
-
-
-
-
-
-
-
-
-
-        map.addLayer({
-            'id': 'parkboufgndary',
-            'type': 'fill',
-            'source': 'national-park',
-            'paint': {
-                'fill-color': '#3e6deb',
+                'fill-color': '#77DD77',
                 'fill-opacity': 0.6
             },
             'filter': ['==', 'Sediment', 5000]
         });
         map.addLayer({
-            'id': 'parkbowdsqry',
+            'id': 'pafasdowqry',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
-                'fill-color': '#3e6deb',
+                'fill-color': '#77DD77',
                 'fill-opacity': 0.2
             },
-            'filter': ['==', 'Sediment', 510]
-        });
-        map.addLayer({
-            'id': 'parkbqesdfgary',
+            'filter': ['any', ['==', 'Sediment', 510], ['==', 'Sediment', 520], ['==', 'Sediment', 530]  ]
+          });
+
+
+
+
+
+          map.addLayer({
+            'id': 'parwfasdowqry',
             'type': 'fill',
             'source': 'national-park',
             'paint': {
-                'fill-color': '#3e6deb',
+                'fill-color': '#ffccde',
                 'fill-opacity': 0.2
             },
-            'filter': ['==', 'Sediment', 520]
-        });
+            'filter': ['any', ['==', 'Sediment', 30], ['==', 'Sediment', 60], ['==', 'Sediment', 70] , ['==', 'Sediment', 80]  ]
+          });
+
+
 
 
         
@@ -161,17 +135,15 @@
     map.on('load', function() {
   const targets = {
     Residential: "Residential",
-    parkboundary: "parkboasdfundary",
-    Water: "Water",
-    Building: "Building",
-    Airport: "Airport",
-    "Other POI": "Pois",
+    MUD: "MUD",
+    SAND: "SAND",
+    ROCK: "ROCK",
   };
   const options = {
     showDefault: true,
-    showCheckbox: true,
-    onlyRendered: true,
-    reverseOrder: true
+    showCheckbox: false,
+    onlyRendered: false,
+    reverseOrder: false
   };
   map.addControl(new MaplibreLegendControl.MaplibreLegendControl(targets, options), "bottom-left");
 });
