@@ -36,6 +36,18 @@
             'type': 'geojson',
             'data': 'https://rtjaceinnis.github.io/RTjaceInnis/Sedi.geojson'
         });
+    map.on('load', () => {
+        map.addSource('root', {
+            'type': 'geojson',
+            'data': 'https://rtjaceinnis.github.io/RTjaceInnis/Windlease_Footprint.geojson'
+        });
+
+
+
+
+
+
+        
 
         map.addLayer({
             'id': 'MUD',
@@ -117,6 +129,11 @@
             },
             'filter': ['any', ['==', 'Sediment', 30], ['==', 'Sediment', 60], ['==', 'Sediment', 70] , ['==', 'Sediment', 80]  ]
           });
+
+
+
+
+
 
 
 
