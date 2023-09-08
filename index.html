@@ -132,9 +132,9 @@
             ['get', 'SeaStarAve'],
             0, "rgba(235, 245, 192, 0.0)",
             1, "rgba(235, 245, 192, 0.4)",
-            5, "rgba(235, 245, 192, 0.8)",
-            10, "rgba(216, 255, 40, 1)",
-            20, "rgba(145, 27, 138, 1)",
+            5, "rgba(235, 245, 192, 0.1)",
+            15, "rgba(216, 255, 40, 1)",
+            40, "rgba(145, 27, 138, 1)",
 
           ],
                 'fill-opacity': 0.6
@@ -149,7 +149,7 @@
             'type': 'fill',
             'source': 'root',
             'paint': {
-                'fill-color': '#58184c',
+                'fill-color': '#17742B',
                 'fill-opacity': 0.5
             },
           });
@@ -168,7 +168,7 @@
     showDefault: true,
     showCheckbox: true,
     onlyRendered: false,
-    reverseOrder: false
+    reverseOrder: true
   };
   map.addControl(new MaplibreLegendControl.MaplibreLegendControl(targets, options), "bottom-left");
 });
