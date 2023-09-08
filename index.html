@@ -40,9 +40,13 @@
             'type': 'geojson',
             'data': 'https://rtjaceinnis.github.io/RTjaceInnis/Windlease_Footprint.geojson'
         });
+        map.addSource('ani', {
+            'type': 'geojson',
+            'data': 'https://rtjaceinnis.github.io/RTjaceInnis/Scallops.geojson'
+        });
 
 
-
+      
       
         map.addLayer({
             'id': 'MUD',
@@ -50,7 +54,7 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#B42222',
-                'fill-opacity': 0.6
+                'fill-opacity': 0.3
             },
             'filter': ['==', 'Sediment', 2000]
         });
@@ -60,7 +64,7 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#B42222',
-                'fill-opacity': 0.2
+                'fill-opacity': 0.1
             },
             'filter': ['any', ['==', 'Sediment', 250], ['==', 'Sediment', 210], ['==', 'Sediment', 260]  ]
           });
@@ -70,7 +74,7 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#ffbf97',
-                'fill-opacity': 0.6
+                'fill-opacity': 0.3
             },
             'filter': ['==', 'Sediment', 1000]
         });
@@ -80,7 +84,7 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#ffbf97',
-                'fill-opacity': 0.4
+                'fill-opacity': 0.1
             },
             'filter': ['any', ['==', 'Sediment', 120], ['==', 'Sediment', 150], ['==', 'Sediment', 170]  ]
           });
@@ -91,7 +95,7 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#77DD77',
-                'fill-opacity': 0.6
+                'fill-opacity': 0.3
             },
             'filter': ['==', 'Sediment', 5000]
         });
@@ -101,21 +105,41 @@
             'source': 'national-park',
             'paint': {
                 'fill-color': '#77DD77',
-                'fill-opacity': 0.2
+                'fill-opacity': 0.1
             },
             'filter': ['any', ['==', 'Sediment', 510], ['==', 'Sediment', 520], ['==', 'Sediment', 530]  ]
           });
 
-          map.addLayer({
-            'id': 'parwfasdowqry',
+          // map.addLayer({
+          //   'id': 'parwfasdowqry',
+          //   'type': 'fill',
+          //   'source': 'national-park',
+          //   'paint': {
+          //       'fill-color': '#ffccde',
+          //       'fill-opacity': 0.2
+          //   },
+          //   'filter': ['any', ['==', 'Sediment', 30], ['==', 'Sediment', 60], ['==', 'Sediment', 70] , ['==', 'Sediment', 80]  ]
+          // });
+
+          
+        map.addLayer({
+            'id': 'animal',
             'type': 'fill',
-            'source': 'national-park',
+            'source': 'ani',
             'paint': {
-                'fill-color': '#ffccde',
-                'fill-opacity': 0.2
+                'fill-color': ['interpolate',
+            ['linear'],
+            ['get', 'SeaStarAve'],
+            0, "rgba(235, 245, 192, 0.0)",
+            1, "rgba(235, 245, 192, 0.4)",
+            5, "rgba(235, 245, 192, 0.8)",
+            10, "rgba(216, 255, 40, 1)",
+            20, "rgba(145, 27, 138, 1)",
+
+          ],
+                'fill-opacity': 0.6
             },
-            'filter': ['any', ['==', 'Sediment', 30], ['==', 'Sediment', 60], ['==', 'Sediment', 70] , ['==', 'Sediment', 80]  ]
-          });
+        });
 
 
 
@@ -138,6 +162,7 @@
     MUD: "MUD",
     SAND: "SAND",
     ROCK: "ROCK",
+    animal: "AnimalDensity"
   };
   const options = {
     showDefault: true,
